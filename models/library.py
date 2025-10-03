@@ -1,12 +1,25 @@
+import uuid
+from datetime import datetime
+
 from models.library_item import LibraryItem
 
 class Library:
+  id: str
   name: str
   items: list[LibraryItem]
+  date_created: datetime
   
-  def __init__(self, name: str, items: list[LibraryItem] = list()):
-    self.name = name
-    self.items = items
+  def __init__(
+      self,
+      name: str,
+      id: str | None,
+      date_added: datetime | None,
+      items: list[LibraryItem] = list()
+    ):
+      self.name = name
+      self.id = id if id is not None else uuid.uuid4()
+      self.date_created = date_added if date_added is not None else datetime.now()
+      self.items = items
 
   def add_item(self, item: LibraryItem):
     self.items.append(item)

@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from lib.commands import LibraryItemType
 from models.library_item import LibraryItem
 
 class Book(LibraryItem):
@@ -23,7 +24,8 @@ class Book(LibraryItem):
     super().__init__(
       id=id,
       name=name,
-      date_added=date_added
+      date_added=date_added,
+      type=LibraryItemType.BOOK
     )
     self.author = author
     self.genre = genre

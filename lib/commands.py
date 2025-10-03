@@ -5,16 +5,26 @@ from models.library import Library
 class Command(IntEnum):
   CREATE_LIBRARY = 1
   DELETE_LIBRARY = 2
-  ADD_LIBRARY_ITEM = 3
-  DELETE_LIBRARY_ITEM = 4
-  EDIT_LIBRARY_ITEM = 5
-  READ_LIBRARY_ITEM = 6
+  READ_LIBRARIES_LIST = 3
+  CREATE_LIBRARY_ITEM = 4
+  DELETE_LIBRARY_ITEM = 5
+  EDIT_LIBRARY_ITEM = 6
+  READ_LIBRARY_ITEM = 7
+  
+
+class LibraryItemType(IntEnum):
+  BOOK = 1
+  MAGAZINE = 2
+  MOVIE = 3
+  MUSIC = 4
+  MUSIC_CLIP = 5
 
 
 commands_descriptions = {
   Command.CREATE_LIBRARY: "Создать новую библиотеку",
   Command.DELETE_LIBRARY: "Удалить библиотеку новую библиотеку",
-  Command.ADD_LIBRARY_ITEM: "Добавить новый элемент в библиотеку",
+  Command.READ_LIBRARIES_LIST: "Показать все библиотеки",
+  Command.CREATE_LIBRARY_ITEM: "Добавить новый элемент в библиотеку",
   Command.DELETE_LIBRARY_ITEM: "Удалить элемент из библиотеки",
   Command.EDIT_LIBRARY_ITEM: "Редактировать элемент библиотеки",
   Command.READ_LIBRARY_ITEM: "Прочитать элемент библиотеки элемент библиотеки",
@@ -34,19 +44,3 @@ def get_user_command() -> Command:
 
     return Command(int(command))
    
-
-def start_create_library():
-  library_name = ""
-  
-  while True:
-    library_name = input("\nВведите имя библиотеки: ")
-    if library_name == "" or library_name.isdigit():
-      print("\nИмя библотеки должно начинаться с латинской буквы!\n")
-      continue
-    break
-  
-  new_library = Library(name=library_name)
-
-  print(f"Библиотека \"{new_library.name}\" была успешно создана!\n")
-
-  return new_library

@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from lib.commands import LibraryItemType
 from models.video import Video
 
 
@@ -20,7 +21,8 @@ class MusicClip(Video):
     super().__init__(
       id=id,
       name=name,
-      date_added=date_added
+      date_added=date_added,
+      type=LibraryItemType.MUSIC_CLIP
     )
     self.release_date = release_date
     self.director = director
