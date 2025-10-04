@@ -2,25 +2,28 @@ import uuid
 from datetime import datetime
 from abc import abstractmethod
 
-from lib.commands import LibraryItemType
+from lib.library_item import LibraryItemType
 
 class LibraryItem:
   id: str
+  parent_id: str
   name: str
-  date_added: datetime
+  date_created: datetime
   type: LibraryItemType
   
   def __init__(
     self,
     name: str,
+    parent_id: str,
     type: LibraryItemType,
     id: str | None,
-    date_added: datetime | None
+    date_created: datetime | None
   ):
     self.name = name
     self.type = type
-    self.id = id if id is not None else uuid.uuid4()
-    self.date_added = date_added if date_added is not None else datetime.now()
+    self.parent_id = parent_id
+    self.id = id if id is not None else str(uuid.uuid4())
+    self.date_created = date_created if date_created is not None else datetime.now()
   
   @abstractmethod
   def show_data(self):

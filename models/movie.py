@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from lib.commands import LibraryItemType
+from lib.library_item import LibraryItemType
 from models.video import Video
 
 
@@ -16,6 +16,7 @@ class Movie(Video):
   def __init__(
     self,
     name: str,
+    parent_id: str,
     director: str | None = None,
     release_date: datetime | None = None,
     rating: int | None = None,
@@ -24,12 +25,13 @@ class Movie(Video):
     country: str | None = None,
     budget: int | None = None,
     id: str | None = None,
-    date_added: datetime | None = None,
+    date_created: datetime | None = None,
     ):
     super().__init__(
       id=id,
       name=name,
-      date_added=date_added,
+      parent_id=parent_id,
+      date_created=date_created,
       type=LibraryItemType.MOVIE
     )
     self.release_date = release_date

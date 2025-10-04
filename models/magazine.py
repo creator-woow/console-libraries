@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from lib.commands import LibraryItemType
+from lib.library_item import LibraryItemType
 from models.library_item import LibraryItem
 
 class Magazine(LibraryItem):
@@ -13,6 +13,7 @@ class Magazine(LibraryItem):
   def __init__(
     self,
     name: str,
+    parent_id: str,
     issue_number: int | None  = None,
     release_date: datetime | None  = None,
     distributor: str | None  = None,
@@ -24,7 +25,8 @@ class Magazine(LibraryItem):
     super().__init__(
       id=id,
       name=name,
-      date_added=date_added,
+      parent_id=parent_id,
+      date_created=date_added,
       type=LibraryItemType.MAGAZINE
     )
     self.release_date = release_date

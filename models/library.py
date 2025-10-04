@@ -17,7 +17,7 @@ class Library:
       items: list[LibraryItem] = list()
     ):
       self.name = name
-      self.id = id if id is not None else uuid.uuid4()
+      self.id = id if id is not None else str(uuid.uuid4())
       self.date_created = date_added if date_added is not None else datetime.now()
       self.items = items
 
