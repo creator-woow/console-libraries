@@ -95,6 +95,8 @@ class App():
     if target_library == None:
       return
     library_item = self.__find_library_item(target_library)
+    if library_item == None:
+      return
     library_item.show_data()
 
   def __create_library_item(self):
@@ -139,18 +141,12 @@ class App():
       case LibraryItemType.BOOK:
         created_library_item = self.__create_book(parent_id=find_library.id, name=library_item_name)
       case LibraryItemType.MAGAZINE:
-        created_library_item = Magazine(
-          name=library_item_name
-        )
+        pass
       case LibraryItemType.MOVIE:
-        created_library_item = Movie(
-          name=library_item_name
-        )
+        pass
       case LibraryItemType.MUSIC_CLIP:
-        created_library_item = MusicClip(
-          name=library_item_name
-        )
-        
+        created_library_item = self.__create_music_clip(parent_id=find_library.id, name=library_item_name)
+      
     target_library: Library
     
     for library in self.libraries:
@@ -184,6 +180,27 @@ class App():
         user_input[key] = None
 
     return Book(
+      name=name,
+      parent_id=parent_id,
+      **user_input
+    )
+    
+  def __create_music_clip(self, parent_id: str, name: str):
+    user_input = {
+      "director": None,
+      "singer": None,
+      "release_date": None,
+    }
+    
+    user_input["director"] = input("Режисер: ")
+    user_input["singer"] = input("Певец: ")
+    user_input["release_date"] = input("Дата выпуска книги: ")
+
+    for key in user_input:
+      if user_input[key] == "":
+        user_input[key] = None
+
+    return MusicClip(
       name=name,
       parent_id=parent_id,
       **user_input
